@@ -25,5 +25,5 @@ parseOpts = Opts
   <*> option auto (short 'p' <> long "port" <> metavar "PORT" <> showDefault <> value 8080 <> help "Port to run the metadata web server on")
 
 pgConnectionString :: Opts -> ConnectionString
-pgConnectionString (Opts { optDbName = dbName, optDbUser = dbUser, optDbHost = dbHost }) =
-  BC.pack $ "host=" <> dbHost <> " dbname=" <> dbName <> " user=" <> dbUser
+pgConnectionString (Opts { optDbHost = dbHost }) =
+  BC.pack dbHost

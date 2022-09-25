@@ -94,7 +94,7 @@ in {
     environment.systemPackages = [ cfg.package config.services.postgresql.package ];
     systemd.services.metadata-server = {
       path = [ cfg.package pkgs.netcat pkgs.postgresql ];
-      preStart = ''
+      preStart = lib.optionalString false ''
         for x in {1..60}; do
           nc -z localhost ${toString config.services.metadata-server.postgres.port} && break
           echo loop $x: waiting for postgresql 2 sec...
@@ -111,8 +111,8 @@ in {
       };
 
       wantedBy = [ "multi-user.target" ];
-      after = [ "postgres.service" ];
-      requires = [ "postgresql.service" ];
+      # after = [ "postgres.service" ];
+      # requires = [ "postgresql.service" ];
     };
   };
 }

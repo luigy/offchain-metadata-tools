@@ -61,8 +61,8 @@ opts =
     )
 
 pgConnectionString :: Opts -> BC.ByteString
-pgConnectionString (Opts { optDbName = dbName, optDbUser = dbUser, optDbHost = dbHost }) =
-  TE.encodeUtf8 $ "host=" <> T.pack dbHost <> " dbname=" <> dbName <> " user=" <> dbUser
+pgConnectionString (Opts { optDbHost = dbHost }) =
+  TE.encodeUtf8 $ T.pack dbHost
 
 mkConnectionPool
   :: BC.ByteString
